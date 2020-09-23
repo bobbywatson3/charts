@@ -288,6 +288,21 @@ resources: {}
   #  cpu: 100m
   #  memory: 128Mi
 
+# Probes configuration
+probes:
+  liveness:
+    initialDelaySeconds: 30
+    failureThreshold: 3
+    periodSeconds: 10
+  readiness:
+    initialDelaySeconds: 15
+    failureThreshold: 3
+    periodSeconds: 10
+  startup:
+    initialDelaySeconds: 90
+    failureThreshold: 3
+    periodSeconds: 10
+
 nodeSelector: {}
 
 tolerations: []

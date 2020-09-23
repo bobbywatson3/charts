@@ -69,19 +69,25 @@ spec:
               path: /status
               port: https-gui
               scheme: HTTPS
-            initialDelaySeconds: 30
+            initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
           readinessProbe:
             httpGet:
               path: /status
               port: https-gui
               scheme: HTTPS
-            initialDelaySeconds: 15
+            initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }}
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
           startupProbe:
             httpGet:
               path: /status
               port: https-gui
-            failureThreshold: 3
-            periodSeconds: 90
+              scheme: HTTPS
+            initialDelaySeconds: {{ .Values.probes.startup.initialDelaySeconds }}
+            failureThreshold: {{ .Values.probes.startup.failureThreshold }}
+            periodSeconds: {{ .Values.probes.startup.periodSeconds }}
           env:
             - name: UNIFI_HTTP_PORT
               value: "{{ .Values.controllerService.port }}"
