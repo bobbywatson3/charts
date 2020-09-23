@@ -76,6 +76,12 @@ spec:
               port: https-gui
               scheme: HTTPS
             initialDelaySeconds: 15
+          startupProbe:
+            httpGet:
+              path: /status
+              port: https-gui
+            failureThreshold: 3
+            periodSeconds: 90
           env:
             - name: UNIFI_HTTP_PORT
               value: "{{ .Values.controllerService.port }}"
